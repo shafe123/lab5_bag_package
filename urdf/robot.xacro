@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
+    <xacro:macro name="laser" params="label x y z r p yaw">
+        <link name="laser_${label}">
+            <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${y}" />
+            <visual>
+                <geometry>
+                    <cylinder radius="0.05" length="0.10" />
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.05" length="0.10" />
+                </geometry>
+            </collision>
+        </link>
+        
+        <joint name="base_laser_${label}_joint" type="fixed">
+            <parent link="base" />
+            <child link="laser_${label}" />    
+        </joint>
+    </xacro:macro>
+    
+    <link name="base">
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.05" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.05" />
+            </geometry>
+        </collision>
+    </link>
+    
+    <joint name="base_wheel_right_joint" type="fixed">
+        <parent link="base" />
+        <child link="wheel_right" />
+    </joint>
+    
+    <link name="wheel_right">
+        <origin xyz="-0.10 -0.4 0.0" rpy="-1.571 0.0 0.0" />
+        <visual>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </collision> 
+    </link>
+    
+    <joint name="base_wheel_left_joint" type="fixed">
+        <parent link="base" />
+        <child link="wheel_left" />
+    </joint>
+    
+    <link name="wheel_left">
+        <origin xyz="-0.10 0.4 0.0" rpy="-1.571 0.0 0.0" />
+        <visual>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </collision> 
+    </link>
+
+    <joint name="base_wheel_center_joint" type="fixed">
+        <parent link="base" />
+        <child link="wheel_center" />
+    </joint>
+    
+    <link name="wheel_center">
+        <origin xyz="-0.10 0.0 0.0" rpy="-1.571 0.0 0.0" />
+        <visual>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+        </collision> 
+    </link>
+    
+    <xacro:laser label="horiz" x="0.2325" y="0.0001" z="1.9201" r="0.2325" p="-0.0001" yaw="1.9201" />
+    <xacro:laser label="vert_top_right" x="0.2978" y="-0.1450" z="1.8451" r="-1.1760" p="0.6313" yaw="-1.9377" />
+    <xacro:laser label="vert_top_left" x="0.2997" y="0.1531" z="1.8443" r="1.1780" p="0.6193" yaw="1.9560" />
+    <xacro:laser label="vert_bottom" x="0.3158" y="-0.0021" z="0.5100" r="3.1355" p="-1.3045" yaw="0.0025" />
+</robot>
+
