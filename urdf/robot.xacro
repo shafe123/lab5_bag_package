@@ -49,14 +49,14 @@
     
     <xacro:reflect_wheel suffix="left" reflect="1" />
     <joint name="base_wheel_center_joint" type="continuous">
-        <origin xyz="0.57 0.0 -0.99" rpy="-1.57 0.0 0.0" />
+        <origin xyz="0.57 0.0 -1.04" rpy="-1.57 0.0 0.0" />
         <axis xyz="0.0 0.0 1.0" />
         <parent link="base" />
         <child link="wheel_center" />
     </joint>
     
     <link name="wheel_center">
-        <origin xyz="0.57 0.0 -0.99" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.57 0.0 -1.04" rpy="0.0 0.0 0.0" />
         <visual>
             <geometry>
                 <cylinder radius="0.15" length="0.05" />
