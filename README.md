@@ -23,4 +23,4 @@ The default launch file starts RVIZ with the joint\_state\_publisher.  To launch
 * rviz
 
 ### Other Comments
-
+Please provide access to Git files.
