@@ -1,80 +1,28 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
-    <xacro:include filename="$(find gazebo_plugins)/test/multi_robot_scenario/xacro/laser/hokuyo.xacro" />
-    <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro" />
-
-    <xacro:macro name="reflect_wheel" params="suffix reflect">
-        <joint name="base_wheel_${suffix}_joint" type="continuous">
-            <origin xyz="-0.37 ${reflect*0.4} -0.99" rpy="-1.57 0.0 0.0" />
-            <axis xyz="0.0 0.0 1.0" />            
-            <parent link="base" />
-            <child link="wheel_${suffix}" />
-        </joint>
-        
-        <link name="wheel_${suffix}">
-            <origin xyz="-0.37 ${reflect*0.01} -0.99" rpy="0.0 0.0 0.0" />
-            <visual>
-                <geometry>
-                    <cylinder radius="0.2" length="0.05" />
-                </geometry>
-            </visual>
-            <collision>
-                <geometry>
-                    <cylinder radius="0.2" length="0.05" />
-                </geometry>
-            </collision> 
-        </link>
-    </xacro:macro>
-    
-    <link name="base">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-        <visual>
-            <origin xyz="0.0 0.0 -0.99" />
-            <geometry>
-                <box size="0.94 0.78 0.25" />
-            </geometry>
-        </visual>
-        <visual>
-            <origin xyz="0.23 0.0 0.0" />
-            <geometry>
-                <box size="0.10 0.78 1.9"/>
-            </geometry>
-        </visual>
-        <collision>
-            <geometry>
-                <box size="0.94 0.78 1.98" />
-            </geometry>
-        </collision>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="navvis_m6">
+    <xacro:include filename="$(find lab5_bag_package)/urdf/old_robot.xacro" />
+    <link name="base_link">
     </link>
-    
-    <xacro:reflect_wheel suffix="left" reflect="1" />
-    <joint name="base_wheel_center_joint" type="continuous">
-        <origin xyz="0.57 0.0 -1.04" rpy="-1.57 0.0 0.0" />
-        <axis xyz="0.0 0.0 1.0" />
-        <parent link="base" />
-        <child link="wheel_center" />
+    <joint name="base_link_base_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="base" />
+        <origin xyz="0.07 0 1.792" rpy="0.0 ${pi} 0.0" />
     </joint>
-    
-    <link name="wheel_center">
-        <origin xyz="0.57 0.0 -1.04" rpy="0.0 0.0 0.0" />
+    <joint name="base_link_imu_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="imu" />
+        <origin xyz="0.0 0.0 0.0" rpy="3.1405788 0.0034281 3.1382064" />
+    </joint>
+    <link name="imu">
         <visual>
             <geometry>
-                <cylinder radius="0.15" length="0.05" />
+                <sphere radius="0.1" />
             </geometry>
         </visual>
-        <collision>
-            <geometry>
-                <cylinder radius="0.15" length="0.05" />
-            </geometry>
-        </collision> 
+    <collision>
+        <geometry>
+            <sphere radius="0.1" />
+        </geometry>
+    </collision>
     </link>
-    <xacro:reflect_wheel suffix="right" reflect="-1" />
-    
-    <xacro:VLP-16 parent="base" name="label_horiz" topic="laser_horiz/packets" hz="10" samples="440" gpu="false">
-        <origin xyz="0.2325 0.0001 0.9301" rpy="-0.0012 0.1146 -0.0015" />
-    </xacro:VLP-16>
-    <xacro:laser name="laser_vert_top_right" parent="base" xyz="0.2978 -0.1450 0.8551" rpy="-1.1760 0.6313 -1.9377" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser" />
-    <xacro:laser name="laser_vert_top_left" parent="base" xyz="0.2997 0.1531 0.8543" rpy="1.1780 0.6198 1.9560" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser" />
-    <xacro:laser name="laser_vert_bottom" parent="base" xyz="0.3158 -0.0021 -0.4800" rpy="3.1355 -1.3045 0.0025" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser" />
 </robot>
-
