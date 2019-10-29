@@ -12,8 +12,6 @@ To use the launch file, download the package, rebuild your catkin\_environment, 
 1. `file`:  *Optional*, Default is *robot.xacro* or *robot.urdf* depending on the `use_xacro` argument.
 1. `rviz_file`:  *Optional*, Default is `$(find lab5_bag_package)/config/config.rviz` Specifies the rviz configuration file for viewing the simulation.
 
-The default launch file starts RVIZ with the joint\_state\_publisher.  To launch without RVIZ and the joint\_state\_publisher, run `roslaunch lab4_urdf_package display.launch use_gui:=false`
-
 ### Dependencies
 * catkin
 * roscore
@@ -21,6 +19,3 @@ The default launch file starts RVIZ with the joint\_state\_publisher.  To launch
 * joint\_state\_publisher
 * xacro
 * rviz
-
-### Other Comments
-Please provide access to Git files.
