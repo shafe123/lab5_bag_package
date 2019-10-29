@@ -4,15 +4,13 @@
     <arg name="use_gui" default="true" />
     <arg name="use_robot_state_publisher" default="true" />
     <arg name="use_sim_time" default="true" />
-    <arg name="use_map" default="true" />
     
     <arg if="$(arg use_xacro)" name="filename" default="robot.xacro" />
     <arg if="$(arg use_old_robot_xacro)" name="filename" default="old_robot.xacro" />
     <arg unless="$(arg use_xacro)" name="filename" default="robot.urdf" />
     
     <arg name="file" default="$(find lab5_bag_package)/urdf/$(arg filename)" />
-    <arg if="$(arg use_map)" name="rviz_file" default="$(find lab5_bag_package)/config/config_with_map.rviz" />
-    <arg unless="$(arg use_map)" name="rviz_file" default="$(find lab5_bag_package)/config/config.rviz" />
+    <arg name="rviz_file" default="$(find lab5_bag_package)/config/config_with_map.rviz" />
     
     <param if="$(arg use_xacro)" name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg file)" />
     <param unless="$(arg use_xacro)" name="robot_description" textfile="$(arg file)" />
@@ -20,10 +18,6 @@
     
     <group if="$(arg use_robot_state_publisher)">
         <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
-    </group>
-    
-    <group if="$(arg use_map)">
-        <node pkg="map_server" type="map_server" name="map_server" args="$(find maps_glennan)/maps/glennan5_map.yaml" />
     </group>
     
     <group if="$(arg use_gui)" >
