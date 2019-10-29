@@ -1,5 +1,6 @@
 # Lab 5
 ## Modern Robotics Programming
+#### Contributors: Ethan Shafer (ehs70), Naomi Hourihane (jdh156), Tejaswini Rajkumar(txr177)
 ---
 ### Launch File
 To use the launch file, download the package, rebuild your catkin\_environment, and source devel/setup.bash.  Then, the launch file can be run by:  `roslaunch lab5_bag_package display.launch`.  The parameters for the launch file are listed below.
